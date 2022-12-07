@@ -1,6 +1,6 @@
-export type Character = {
+export type TCharacter = {
   gender: 'string';
-  id: 'string';
+  id?: 'string';
   image: 'string';
   name: 'string';
 };

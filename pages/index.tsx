@@ -1,37 +1,37 @@
-import Head from 'next/head';
-import { useQuery } from '@apollo/client';
-import { Character } from './types';
+import { TCharacter } from './types';
 import styles from '../styles/Home.module.scss';
-import { GET_CHARACTERS } from '../api/characters';
+import { useGetAllCharacters } from '../api/characters';
+import { HeadComp } from '../components/HeadComp';
+import { Footer } from '../components/Footer';
+import { Character } from '../components/Character';
+import { useState } from 'react';
 
 const Home = () => {
-
-  const { loading, error, data } = useQuery(GET_CHARACTERS);
+  const [page, setPage] = useState(1);
+  const [loading, error, data] = useGetAllCharacters(page);
 
   if (loading) {
-    return (<h1>Loading...</h1>)
+    return <h1>Loading...</h1>;
   }
   if (error) {
-    return (<h1>{error.message}</h1>)
+    return <h1>{error.message}</h1>;
   }
 
-  const characters: Character[] = data?.characters.results
+  const characters: TCharacter[] = data?.characters.results;
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Rick and Morty</title>
-        <meta name="description" content="Rick and Morty Characters" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <HeadComp />
       <main className={styles.main}>
-        <ul>
-          {characters.map(char => <li key={char.id}>{char.name}</li>)}
-        </ul>
+        {characters.map(char => (
+          <Character key={char.id} gender={char.gender} image={char.image} name={char.name} />
+        ))}
       </main>
-
-      <footer className={styles.footer}>Footer</footer>
+      <div>
+        <button onClick={() => setPage(prev => prev - 1)}> - </button>
+        <button onClick={() => setPage(prev => prev + 1)}> + </button>
+      </div>
+      <Footer />
     </div>
   );
 };
