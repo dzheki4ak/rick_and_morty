@@ -1,2 +1,2 @@
-import styles from '../../styles/Home.module.scss';
-export const Footer = () => <footer className={styles.footer}>Footer</footer>;
+import { StyledFooter } from './Footer.styles';
+export const Footer = () => <StyledFooter>R & M</StyledFooter>;

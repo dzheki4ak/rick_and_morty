@@ -3,7 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 export const useGetAllCharacters = (page: number) => {
   const getAllCharactersQuery = gql`
     query {
-      characters(page: ${page || 1}) {
+      characters(page: ${page}) {
         results {
           id
           name
