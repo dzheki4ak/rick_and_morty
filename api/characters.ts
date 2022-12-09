@@ -1,35 +1,25 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-export const useGetAllCharacters = (page: number) => {
-  const getAllCharactersQuery = gql`
-    query {
-      characters(page: ${page}) {
-        results {
-          id
-          name
-          gender
-          image
-        }
+export const getAllCharactersQuery = gql`
+  query allCharacters($page: Int!) {
+    characters(page: $page) {
+      results {
+        id
+        name
+        gender
+        image
       }
     }
-  `;
-  const { loading, error, data } = useQuery(getAllCharactersQuery);
+  }
+`;
 
-  return [loading, error, data];
-};
-
-export const useGetCharacter = (id: string) => {
-  const getCharacterQuery = gql`
-  query {
-    character(id: ${id}) {
+export const getCharacterQuery = gql`
+  query singleCharacter($id: ID!) {
+    character(id: $id) {
       name
       gender
       image
       type
     }
   }
-  `;
-  const { loading, error, data } = useQuery(getCharacterQuery);
-
-  return [loading, error, data];
-};
+`;

@@ -3,7 +3,7 @@
 }
 
 .main {
-  min-height: calc(100vh - 84px - 84.5px);
+  min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -39,7 +39,7 @@
 @media (min-width: 600px) {
   .main {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
   }
   .btnGroup {
