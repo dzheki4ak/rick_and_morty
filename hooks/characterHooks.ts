@@ -1,9 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { getAllCharactersQuery, getCharacterQuery } from '../api/characters';
 
-export const useGetAllCharacters = (page: number) => {
+export const useGetAllCharacters = (
+  page: number,
+  name?: string,
+  gender?: string,
+) => {
   const { loading, error, data } = useQuery(getAllCharactersQuery, {
-    variables: { page },
+    variables: { page, name, gender },
   });
 
   return [loading, error, data];
@@ -11,7 +15,7 @@ export const useGetAllCharacters = (page: number) => {
 
 export const useGetCharacter = (id: string | undefined) => {
   const { loading, error, data } = useQuery(getCharacterQuery, {
-    variables: { id: id },
+    variables: { id },
   });
 
   return [loading, error, data];

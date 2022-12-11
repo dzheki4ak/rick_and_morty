@@ -10,14 +10,24 @@ import styles from '../styles/Home.module.scss';
 
 const Home = () => {
   const [page, setPage] = useState(1);
-  const [loading, error, data] = useGetAllCharacters(page);
+  const [name, setName] = useState<string | undefined>('');
+  const [gender, setGender] = useState<string | undefined>('');
+
+  const [loading, error, data] = useGetAllCharacters(page, name, gender);
 
   const characters: TCharacter[] = data?.characters.results;
 
   return (
     <div className={styles.container}>
       <HeadComp />
-      <Header error={error} page={page} setPage={setPage} loading={loading} />
+      <Header
+        error={error}
+        page={page}
+        setPage={setPage}
+        setName={setName}
+        setGender={setGender}
+        loading={loading}
+      />
       <main className={styles.main}>
         {loading && <h1 style={{ margin: 'auto' }}>Loading...</h1>}
         {error && <h1 style={{ margin: 'auto' }}>{error.message}</h1>}

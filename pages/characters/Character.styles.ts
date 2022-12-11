@@ -5,3 +5,5 @@ export const CardStyled = styled(Card)({
   maxWidth: 500,
   margin: 'auto',
 });
+
+

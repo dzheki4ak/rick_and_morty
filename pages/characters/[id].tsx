@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardContent, Button, CardMedia, Typography } from '@mui/material';
 import { HeadComp } from '../../components/HeadComp';
 import { useGetCharacter } from '../../hooks';
 import { CardStyled } from './Character.styles';
@@ -23,25 +20,24 @@ const CharacterFull = () => {
         {error && <h1 style={{ margin: 'auto' }}>{error.message}</h1>}
         {!loading && !error && (
           <CardStyled>
+            <CardMedia
+              component="img"
+              image={data.character.image}
+              alt={data.character.name}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {data.character.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {data.character.type}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {data.character.gender}
+              </Typography>
+            </CardContent>
             <Link href="/">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  image={data.character.image}
-                  alt={data.character.name}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {data.character.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {data.character.type}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {data.character.gender}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+              <Button>Home</Button>
             </Link>
           </CardStyled>
         )}

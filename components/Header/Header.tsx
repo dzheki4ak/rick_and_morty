@@ -7,21 +7,54 @@ type THeaderProps = {
   page?: number;
   loading: boolean;
   setPage: (num: number) => void;
+  setName: (num: string) => void;
+  setGender: (num: string) => void;
 };
 
-export const Header: React.FC<THeaderProps> = ({ error, page, setPage, loading }) => {
+export const Header: React.FC<THeaderProps> = ({
+  error,
+  page,
+  setPage,
+  loading,
+  setName,
+  setGender,
+}) => {
   const homeClickHandler = () => {
     setPage(1);
+    setName('');
+    setGender('');
+  };
+
+  const nameHandler = () => {
+    const charName = prompt(`Enter Character's Name`, 'i.e Morty') || '';
+    setName(charName);
+  };
+
+  const genderHandler = () => {
+    const charGender =
+      prompt(`Enter Character's Gender`, 'Male | Female | Unknown') || '';
+    setGender(charGender);
   };
 
   return (
     <HeaderStyled>
       <div className={styles.btnGroup}>
-        <button onClick={homeClickHandler} className={styles.button} disabled={error || page === 1}>
-          <Link href='/'>Home</Link>
+        <button onClick={homeClickHandler} className={styles.button}>
+          <Link href="/">Home / Reset</Link>
         </button>
-        <button className={styles.button} disabled={error || loading}>
-          Sort by name
+        <button
+          onClick={nameHandler}
+          className={styles.button}
+          disabled={error || loading}
+        >
+          Filter by name
+        </button>
+        <button
+          onClick={genderHandler}
+          className={styles.button}
+          disabled={error || loading}
+        >
+          Filter by Gender
         </button>
       </div>
     </HeaderStyled>
