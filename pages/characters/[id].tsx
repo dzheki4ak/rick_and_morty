@@ -10,7 +10,7 @@ const CharacterFull = () => {
   const {
     query: { id },
   } = useRouter();
-  const [loading, error, data] = useGetCharacter(id?.toString());
+  const { loading, error, data } = useGetCharacter(id?.toString() || '');
 
   return (
     <div className={styles.container}>
@@ -22,18 +22,18 @@ const CharacterFull = () => {
           <CardStyled>
             <CardMedia
               component="img"
-              image={data.character.image}
-              alt={data.character.name}
+              image={data?.character?.image}
+              alt={data?.character?.name}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {data.character.name}
+                {data?.character?.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {data.character.type}
+                {data?.character?.type}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {data.character.gender}
+                {data?.character?.gender}
               </Typography>
             </CardContent>
             <Link href="/">

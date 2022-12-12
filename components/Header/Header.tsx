@@ -1,9 +1,10 @@
 import { HeaderStyled } from './Header.styles';
 import Link from 'next/link';
 import styles from '../../styles/Home.module.scss';
+import { ApolloError } from '@apollo/client';
 
 type THeaderProps = {
-  error: boolean;
+  error: ApolloError | undefined;
   page?: number;
   loading: boolean;
   setPage: (num: number) => void;
@@ -45,14 +46,14 @@ export const Header: React.FC<THeaderProps> = ({
         <button
           onClick={nameHandler}
           className={styles.button}
-          disabled={error || loading}
+          disabled={Boolean(error?.message) || loading}
         >
           Filter by name
         </button>
         <button
           onClick={genderHandler}
           className={styles.button}
-          disabled={error || loading}
+          disabled={Boolean(error?.message) || loading}
         >
           Filter by Gender
         </button>

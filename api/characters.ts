@@ -1,6 +1,8 @@
-import { gql } from '@apollo/client';
+import { DocumentNode, gql } from '@apollo/client';
+import { graphql } from '../gql';
 
-export const getAllCharactersQuery = gql`
+
+export const getAllCharactersQuery = graphql(`
   query allCharacters($page: Int!, $name: String, $gender: String) {
     characters(page: $page, filter: { name: $name, gender: $gender }) {
       results {
@@ -11,9 +13,9 @@ export const getAllCharactersQuery = gql`
       }
     }
   }
-`;
+`);
 
-export const getCharacterQuery = gql`
+export const getCharacterQuery = graphql(`
   query singleCharacter($id: ID!) {
     character(id: $id) {
       name
@@ -22,4 +24,4 @@ export const getCharacterQuery = gql`
       type
     }
   }
-`;
+`);

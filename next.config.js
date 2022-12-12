@@ -4,6 +4,4 @@ const nextConfig = {
   swcMinify: true,
 };
 
-rickandmortyapi.com;
-
 module.exports = nextConfig;

@@ -10,13 +10,13 @@ export const useGetAllCharacters = (
     variables: { page, name, gender },
   });
 
-  return [loading, error, data];
+  return { loading, error, data };
 };
 
-export const useGetCharacter = (id: string | undefined) => {
+export const useGetCharacter = (id: string) => {
   const { loading, error, data } = useQuery(getCharacterQuery, {
     variables: { id },
   });
 
-  return [loading, error, data];
+  return { loading, error, data };
 };

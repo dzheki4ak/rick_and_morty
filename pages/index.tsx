@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { TCharacter } from './types';
 import { useGetAllCharacters } from '../hooks';
 import { HeadComp } from '../components/HeadComp';
 import { Footer } from '../components/Footer';
@@ -13,9 +12,7 @@ const Home = () => {
   const [name, setName] = useState<string | undefined>('');
   const [gender, setGender] = useState<string | undefined>('');
 
-  const [loading, error, data] = useGetAllCharacters(page, name, gender);
-
-  const characters: TCharacter[] = data?.characters.results;
+  const { loading, error, data } = useGetAllCharacters(page, name, gender);
 
   return (
     <div className={styles.container}>
@@ -33,12 +30,13 @@ const Home = () => {
         {error && <h1 style={{ margin: 'auto' }}>{error.message}</h1>}
         {!loading &&
           !error &&
-          characters.map(char => (
-            <Link href={`/characters/${char.id}`} key={char.id}>
+          data &&
+          data.characters?.results?.map(char => (
+            <Link href={`/characters/${char?.id}`} key={char?.id}>
               <Character
-                gender={char.gender}
-                image={char.image}
-                name={char.name}
+                gender={char?.gender}
+                image={char?.image || ''}
+                name={char?.name}
               />
             </Link>
           ))}

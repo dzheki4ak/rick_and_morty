@@ -12,7 +12,11 @@ export const Character: React.FC<TCharacter> = ({ gender, image, name }) => {
         <CardMedia component="img" image={image} alt={`Image of ${name}`} />
         <CardContent>
           <Typography
-            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+            sx={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
             gutterBottom
             variant="h5"
             component="div"
